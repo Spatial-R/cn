@@ -19,7 +19,8 @@ Welcome to surveillance Project! 这是一篇针对surveillance程序包相关�
 
 ## 前瞻性暴发探测
 
-Aberration Detection(Change-point detection, Outbreak Detection)，我将其都翻译为暴发探测，但仔细推敲，各词组间含义差别还是有点大。具体如下：   
+Aberration Detection(Change-point detection, Outbreak Detection)，我将其都翻译为暴发探测，但仔细推敲，各词组间含义差别还是有点大。具体如下：  
+ 
 1. [Aberration](http://baike.baidu.com/view/25914.htm?fromtitle=Aberration&fromid=8102429&type=syn) 原指光行差，是指同一瞬间运动中观测者所观测的天体视方向与静止观察者所观测到天体的真方向之差，通俗理解就是偏差。  
 2. [Change-Point](http://baike.baidu.com/view/4399435.htm) 指在某一位置或时刻点，前后观测值遵循两个不同的模型。[changepoint](http://CRAN.R-project.org/package=changepoint) 程序包也提供了一系列变点探测的方法，主要依托于变点前后均值或和方差的差异性。  
 3. [Disease Outbreak](http://baike.baidu.com/link?url=xnLkGt0RfVwftGje17US3jJHmST1IKCoS9qEZnJ9A-5eGQ8ms4GAgTp5mCstsGjYpzkRHpaZiJ6F8Gt7nHqQj_) 指在局限的区域范围和短时间内突然出现许多同类病例的现象，对于区域范围、时间范围和案例数目都没有确切定义，因而不同空间尺度下，可能会存在截然不同的疾病分布状态。  
@@ -36,11 +37,11 @@ Aberration Detection(Change-point detection, Outbreak Detection)，我将其都�
 
 单个异常点监测是监测系统中较为常见的方式，通俗地理解就是一段时序数据中在某个时间点发生了较为重要的改变。
 
-   1. Method **EARS**： CDC异常检测系统中的早期方法，surveillance程序包中的 **sarsC** 可实现这个过程，更为详细地说明可参考[Fricker，Hegler 和 Dunfee](http://onlinelibrary.wiley.com/doi/10.1002/sim.3197/abstract)。当疾病历史数据较少时且数据较平稳时，此方法较合适，同时该程序包提供了**C1**、**C2**和**C3**方式来实现变点探测。但该方法没有考虑到疾病时序数据如过度离散、周期性、长期趋势和过往疾病暴发对现状的影响等特性，同时也没有对将来数据进行区间预测。
+1. Method **EARS**： CDC异常检测系统中的早期方法，surveillance程序包中的 **sarsC** 可实现这个过程，更为详细地说明可参考[Fricker，Hegler 和 Dunfee](http://onlinelibrary.wiley.com/doi/10.1002/sim.3197/abstract)。当疾病历史数据较少时且数据较平稳时，此方法较合适，同时该程序包提供了**C1**、**C2**和**C3**方式来实现变点探测。但该方法没有考虑到疾病时序数据如过度离散、周期性、长期趋势和过往疾病暴发对现状的影响等特性，同时也没有对将来数据进行区间预测。 
    
-   2.  Method **Farrington**： 该方法最初由Farrington在[Farrington et.al. 1996](http://www.jstor.org/pss/2983331) 提出，[Hohle和Mazick 2010](http://www.statistik.lmu.de/~hoehle/pubs/hoehle_mazick2009-preprint.pdf)一文中详细介绍了该方法，其主要基于广义线性或相加模型来探测异常值，而[Noufaily et.al 2012](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3692796/)在原方法的基础上，采用因子来校准季节性，同时当Anscombe残差大于2或者3时采用再加权进而有效改善了**"低加权"**现象(Down-weighting)。 FarringtonFlexible函数可实现该过程。
+2.  Method **Farrington**： 该方法最初由Farrington在[Farrington et.al. 1996](http://www.jstor.org/pss/2983331) 提出，[Hohle和Mazick 2010](http://www.statistik.lmu.de/~hoehle/pubs/hoehle_mazick2009-preprint.pdf)一文中详细介绍了该方法，其主要基于广义线性或相加模型来探测异常值，而[Noufaily et.al 2012](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3692796/)在原方法的基础上，采用因子来校准季节性，同时当Anscombe残差大于2或者3时采用再加权进而有效改善了**"低加权"**现象(Down-weighting)。 FarringtonFlexible函数可实现该过程。  
    
-   3. Method **Boda**: 在FarringtonFlexible方法的基础上，boda (Bayesian Outbreak Detection Algorithm)采用成熟的贝叶斯广义线性或相加模型，通过惩罚样条函数(Penalized Spline)来校准长期和季节性趋势，并能即时调整以往暴发或以往疾病情况对当前个案数的影响。为了更好地获得参数的后验分布，boda采用[Integrated Nested Laplace Approximaxion](http://www.sciencedirect.com/science/article/pii/S0167947313001552)方法来逼近贝叶斯推断。
+3. Method **Boda**: 在FarringtonFlexible方法的基础上，boda (Bayesian Outbreak Detection Algorithm)采用成熟的贝叶斯广义线性或相加模型，通过惩罚样条函数(Penalized Spline)来校准长期和季节性趋势，并能即时调整以往暴发或以往疾病情况对当前个案数的影响。为了更好地获得参数的后验分布，boda采用[Integrated Nested Laplace Approximaxion](http://www.sciencedirect.com/science/article/pii/S0167947313001552)方法来逼近贝叶斯推断。
 
 ----------------------------------------------------------------------
 
