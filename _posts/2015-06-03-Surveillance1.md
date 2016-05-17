@@ -19,13 +19,10 @@ Welcome to surveillance Project! 这是一篇针对surveillance程序包相关�
 
 ## 前瞻性暴发探测
 
-Aberration Detection(Change-point detection, Outbreak Detection)，我将其都翻译为暴发探测，但仔细推敲，各词组间含义差别还是有点大。具体如下： 
-  
-   1. [Aberration](http://baike.baidu.com/view/25914.htm?fromtitle=Aberration&fromid=8102429&type=syn) 原指光行差，是指同一瞬间运动中观测者所观测的天体视方向与静止观察者所观测到天体的真方向之差，通俗理解就是偏差。
-  
-  2. [Change-Point](http://baike.baidu.com/view/4399435.htm) 指在某一位置或时刻点，前后观测值遵循两个不同的模型。[changepoint](http://CRAN.R-project.org/package=changepoint) 程序包也提供了一系列变点探测的方法，主要依托于变点前后均值或和方差的差异性。
-  
-  3. [Disease Outbreak](http://baike.baidu.com/link?url=xnLkGt0RfVwftGje17US3jJHmST1IKCoS9qEZnJ9A-5eGQ8ms4GAgTp5mCstsGjYpzkRHpaZiJ6F8Gt7nHqQj_) 指在局限的区域范围和短时间内突然出现许多同类病例的现象，对于区域范围、时间范围和案例数目都没有确切定义，因而不同空间尺度下，可能会存在截然不同的疾病分布状态。  
+Aberration Detection(Change-point detection, Outbreak Detection)，我将其都翻译为暴发探测，但仔细推敲，各词组间含义差别还是有点大。具体如下：   
+1. [Aberration](http://baike.baidu.com/view/25914.htm?fromtitle=Aberration&fromid=8102429&type=syn) 原指光行差，是指同一瞬间运动中观测者所观测的天体视方向与静止观察者所观测到天体的真方向之差，通俗理解就是偏差。  
+2. [Change-Point](http://baike.baidu.com/view/4399435.htm) 指在某一位置或时刻点，前后观测值遵循两个不同的模型。[changepoint](http://CRAN.R-project.org/package=changepoint) 程序包也提供了一系列变点探测的方法，主要依托于变点前后均值或和方差的差异性。  
+3. [Disease Outbreak](http://baike.baidu.com/link?url=xnLkGt0RfVwftGje17US3jJHmST1IKCoS9qEZnJ9A-5eGQ8ms4GAgTp5mCstsGjYpzkRHpaZiJ6F8Gt7nHqQj_) 指在局限的区域范围和短时间内突然出现许多同类病例的现象，对于区域范围、时间范围和案例数目都没有确切定义，因而不同空间尺度下，可能会存在截然不同的疾病分布状态。  
 
   综上所述，用Aberration或Change-point来归纳surveillance程序包中的方法可能更加确切。同时也需注意，上述两种都是正向改变，也就是说个案数目应增多。
 
