@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "surveillance 程序包简介(二): 时空多成分模型"
+title: "时空多成分模型"
 date: 2015-09-13
 comments: true
 categories: 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "surveillance 程序包简介(一): 暴发探测"
+title: "前瞻性暴发探测"
 date: 2015-06-3
 comments: true
 categories: 
