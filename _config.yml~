@@ -1,6 +1,0 @@
-markdown: kramdown
-permalink: /:year/:month/:title/
-url: http://spatial-r.github.io/cn
-author: Spatial-R
-pygments: true
-

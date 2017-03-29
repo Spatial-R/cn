@@ -16,7 +16,7 @@ Welocome to the surveillance project again! 这是一篇针对[Surveillance](htt
 
 ---------------------------------------------------------------------------
 
-## 模型综述 ##
+## 模型综述 
 
 时空多成分模型(Spatial-temporal Multicomponent Model)的简约版最初由[Held et al. (2005)](http://www.researchgate.net/profile/Michael_Hoehle/publication/45138457_A_statistical_framework_for_the_analysis_of_multivariate_infectious_disease_surveillance_data/links/0c960520b310bb8378000000.pdf)提出，并应用于麻疹疫情中[PS: 基于浙江省麻疹疫情已写了篇类似的文章，已投中华流行病学杂志]。[Leonhard Held et al.(2006)](http://biostatistics.oxfordjournals.org/content/7/3/422.full)在“A two-componet model for counts of infectious disease”一文中构建了随机双成分(**相互独立**)模型，包括**局部特性成分**(Endemic Component)和**时间流行成分**(Epidemic  Component)，其中局部特性成分控制季节效应的影响，时间流行成分同时考虑了疾病疫情的时间相关性和暴发影响。该模型假设时序数据服从Generalised Branching Process with Immigration，
 并分别对甲肝和乙肝进行了拟合。在surveillance程序包中，基础模型中将时序数据分为三个成分：局部特性成分(Endemic component, end)、时间自相关成分(Autoregressive component，ar)和空间流行成分(Epidemic component, ne)，并在公式中分别用$ν_(i,t)$、$λ_(i,t)$和$ϕ_(i,t)$表示。其中局部特性成分反映疫情的本地风险情况，时间自相关成分反映的是过去时段疫情在时间维度上产生的影响，而空间流行成分反映的是邻近单元对目标单元产生的影响(可根据多种空间权重矩阵来定义**邻近**)。具体的公式如下：
@@ -27,7 +27,7 @@ $γ_0$、$α_0$  和 $β_0$分别代表了三成分的截距，$γ_i$、$α_i$  
 
 -----------------------------------------------------
 
-## 模型优点##
+## 模型优点
 
 surveillance程序包中的时空多成分模型相关优点主要体现在如下几个方面：  
 
@@ -43,11 +43,11 @@ surveillance程序包中的时空多成分模型相关优点主要体现在如�
 
 --------------------------------------------------------
 
-## 具体实例##   
+## 具体实例
 
 --------------------------------------------------------
 
-### STS数据###
+### STS数据
 
 surveillance程序包中提供**hhh4**函数来拟合时空多成分模型，其所需的数据格式为sts(surveillance time series)。sts数据需包括以下几个部分：**疫情数据**，**人口数据**，**空间邻阶数据**,**地图数据**或和**协变量数据**。可借助**new**函数生成sts数据，示例代码如下：
 
@@ -57,7 +57,7 @@ surveillance程序包中提供**hhh4**函数来拟合时空多成分模型，其
 
 此处，我的数据是逐日数据，因而freq设置为365，dat,final是疫情数据，dat.zj是地图数据，populationFrac是人口比例数据(研究单元人口占总研究单元人口数的百分比)。此处一定需注意各个数据集之间匹配问题，也就是变量名一定要一致(重要的事情不说三遍!!!)。对于空间邻阶文件，可通过spdep程序包中的**poly2adjmat**和**nbOrder**函数来生成，但需注意孤立区域，如浙江省的洞头县尽管从地图属性是孤立的，但考虑传染病的扩散特性，还是将其设置为与乐清市相邻。
 
-### 数据可视化 ####
+### 数据可视化
 
 对于sts数据，surveillance程序包提供了一系列简约的方式来进行数据可视化(时间和空间)。考虑到数据保密性，此处，仅利用程序包自带的measlesWeserEms数据集来实现数据可视化和模型拟合。时间序列可视化的部分代码如下：   
 
@@ -72,7 +72,7 @@ plot(measlesWeserEms15, type =observed ~ time | unit, legend.opts = NULL)
 
 你可以调节type参数的值，如“observed ~ time”或“observed ~ unit”等来达到不同的可视化效果，需要注意的是其采用spplot和lattice绘图系统，若想调节图形相关参数的可查阅程序包的帮助文档。当然，也可以用ggplot2和gridExtra程序包，分别实现数据可视化和图形组合(推荐之至)。
 
-###模型拟合###
+### 模型拟合
 
 此处先拟合基础模型，其包括三成分，其中各研究单元的人口比例值作为offset结合地域面积来反映人口密度，局部特性成分控制季节效应，时间流行成分和空间流行成分(一阶邻近)都只包括截距项。为控制研究区域疫情的过度离散特性，采用负二项分布(NegBin1)进行拟合，当然也可以选择泊松分布(Possion)。相关代码如下：
 
@@ -120,7 +120,7 @@ plot(measlesFit_basic, type = "fitted", units = districts2plot, hide0s = TRUE)
 
 对于上图的解读可以从如下方面进行：三种颜色条纹分别代表局部特性成分、时间自相关成分和空间流行成分(需注意的是，此图中作者将Epidemic理解成spatiotemporal，似乎也是有一定道理)。总体而言，这六个研究单元的麻疹疫情主要是受先前麻疹疫情的影响，麻疹疫情出现后，没及时发现并及时进行相应处理。区域单元03453在2002年上半年疫情受邻近区域的影响较大。
 
-### 纳入协变量 ####
+### 纳入协变量
 
 对于疫苗针对传染病而言，相关疫苗覆盖率对传染病疫情的传播具有重要影响。因此，此处易感人群比例作为协变量纳入基础模型，至于纳入何种成分中，且看AIC值。相关代码如下：
 
@@ -163,7 +163,7 @@ aics_vacc <- AIC(measlesFits_vacc);aics_vacc[order(aics_vacc[, "AIC"]), ]
 ```
 由AIC值可知，当易感人群比例这个变量纳入局部特性成分时模拟拟合度最好，这个也很好理解，本地免疫屏障影响着麻疹疫情的本地风险水平。当然，选择模型时候仍需结合专业知识。
 
-### Power-law ###
+### Power-law
 
 在基础模型中，我们假定麻疹疫情只会在具有共同边际的研究单元间传播，且传播系数都一致。考虑到人群的流动性，基础模型明显具有局限性。结合相关协变量，我们同时考虑研究区域的人口百分比(人越多，远距离传播的可能性就越大)和多阶传播(多阶相邻和Power-law)。相关代码如下：
 
@@ -207,7 +207,7 @@ summary(measlesFit_powerlaw, idx2Exp = 1:5, amplitudeShift = TRUE, maxEV = TRUE)
 ```
 通过定义不同形式的空间权重矩阵，可较好地度量传染病的空间蔓延规律，尤其是在人口流动或是交通数据缺乏的情况下。 当然，如果你有相关数据，直接修改weights参数即可。
 
-### Random effect ####
+### Random effect
 
 对于政府决策者，不仅要知道整个研究区域内传染病的时空传播特性，还需要知晓其在区域间的传播异质性，以便采取相应措施来防控传染病。另一方面，很多影响传染病传播的因素较难度量，而随机效应则是解决这类不确定问题的利器。我们在power-law模型的基础上构建三个成分的随机效应，具体代码如下：
 
@@ -253,7 +253,7 @@ print(plot(measlesFit_ri, type = "ri", component = comp, xlim = c(6.6,8.8),
 
 ---------------------------------------------
 
-##结语##
+##结语
 
 本文比较粗糙地介绍了时空多成分模型在R中的实现步骤及相关注意事项，当然，你还可以对模型进行扩展。接下来打算基于[shiny](https://www.rstudio.com/products/shiny/)来开发时空多成分模型的app，也是作为大疫情数据分析平台的一部分。若有什么问题，请及时联系[张兵: Spatial-R](zhangbing4502431@outlook.com)，谢谢！
 
