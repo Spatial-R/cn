@@ -50,3 +50,4 @@ Email：zhangbing4502431@outlook.com；主页：<http://spatial-r.github.io/>
 - [空气污染与R](https://github.com/Spatial-R/Air-pollution-and-R/blob/master/Air%20pollution.pdf)，第七届中国R语言会议上海会场(2014.12.06): 介绍如何利用R软件获取空气质量数据以及空气质量与健康的生态学研究方法。
 - [基于R软件的传染病数据可视化及统计分析平台](https://github.com/Spatial-R/spatial-r.github.io/raw/master/Resource/InfectiousDiseasePlatform.pdf)，第八届中国R语言会议武汉会场(2015.11.7): 初步构建了基于R语言在传染病或公共卫生领域方面的平台搭建思路。
 - [Spatial-temporal Multicomponent Model in Surveillance Package](https://github.com/Spatial-R/spatial-r.github.io/raw/master/Resource/Spatial-temporal%20Model%20IN%20r.pdf)，受邀简单介绍R软件中surveillance程序包来构建时空多成分模型。
+- [传染病监测数据与R软件](https://github.com/Spatial-R/spatial-r.github.io/raw/master/Resource/Zhejiang-infectious.pdf)，受邀介绍如何用R软件来分析传染病监测数据。
