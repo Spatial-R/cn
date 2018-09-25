@@ -12,15 +12,16 @@ tags:
 ---
 ---
 
-#@写在这中秋前夜: 动起来
+# @写在这中秋前夜: 动起来
 
-##动画制作
+## 动画制作
 
 近期有不少朋友一直在咨询如何用R来做动画(Animation)。制作动画，对于传染病工作者去发现传染病时空传播规律具有较大的价值。对其他学科而言，当时点较多时，通过动画来展现其分布趋势也是另有一番价值。当酷炫的动画穿插在你精美的PPT中时，是不是也要加个几个分啊？ 
 
 简单而言之，动画可以将其理解为就是将多张静态图堆在一起，当然，不是随意堆砌，一般是根据某个类别属性(可以是时间点，也可以是城市等)。总体起来，动画制作包括两个步骤: 静态图制作及图形组装。静态图制作，这个就比较容易理解，毕竟R软件众多显著优势之一就是图形制作。对于图形组装，则可以依托[谢益辉](https://yihui.name/en/)的[animation](https://cran.r-project.org/web/packages/animation/index.html)程序包程序包来实现。考虑到R软件中绘图系统的差异性, 我们可用基础绘图系统来绘制静态图，然后用animation程序包来封装。不过本人更加偏爱[ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html)绘图系统，它的伟大之处在于**系统**(妈妈再也不会担心改变图形某个属性是哪个函数控制了)和**美观**(比十八岁的美女还要美,你们信吗?). 正所谓条条道路通罗马, 而本文将要讲述的也是后者(好像我对美确实没什么抵抗力). 今晚的猪脚是gganimate程序包: extends the grammar of graphics as implemented by ggplot2 to include the description of animation, 一个可让你们体会图形制作和组装一步到位的酸爽.
 
-###程序包安装
+### 程序包安装
+
  [gganimate](https://github.com/thomasp85/gganimate)程序包即可通过官网上下载,也可通过github([thomasp85](https://github.com/thomasp85))安装, 需要注意的是github版本一般会较早更新. 安装的具体代码如下:  
 
 - **官网途径**(因更新版本,官网途径已经失效):  
@@ -33,7 +34,8 @@ install.packages("gganimate")
 # install.packages('devtools')  
 devtools::install_github('thomasp85/gganimate')
 ```
-###主要函数
+
+### 主要函数
 
 -  **`transition_*()`**:  定义动画是根据哪个变量进行"动".
 -   **`view_*()`**: 定义标尺的位置.
@@ -43,7 +45,8 @@ devtools::install_github('thomasp85/gganimate')
 
 (注意,此处只列出部分函数,正如作者所说的: extends the grammar of graphics as implemented by ggplot2, 所以,这个包所包含的应该是一整套关于动画绘制体系,而不仅仅只是几个函数.)
 
-###动画制作
+### 动画制作
+
 首先,我们用程序包自带的例子给大家做一个演示:
 
 ```
